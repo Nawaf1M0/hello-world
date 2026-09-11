@@ -3,8 +3,11 @@ import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig(({ command }) => ({
-  // Served from https://<user>.github.io/hello-world/task-manager/ in production
-  // (GitHub Pages), but from the server root during local dev.
-  base: command === 'build' ? '/hello-world/task-manager/' : '/',
+  // The GitHub Pages workflow publishes task-manager/dist as the site root,
+  // so it's served from https://<user>.github.io/hello-world/ in production
+  // (not /hello-world/task-manager/ — there's no extra path segment for the
+  // subdirectory since dist itself becomes the Pages root). Local dev keeps
+  // using the server root.
+  base: command === 'build' ? '/hello-world/' : '/',
   plugins: [react()],
 }))
